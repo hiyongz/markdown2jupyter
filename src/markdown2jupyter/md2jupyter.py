@@ -2,16 +2,14 @@ from . import markdown2jupyter, create_executor
 import click
 import logging
 import subprocess
-import os.path
-
 
 @click.command()
 @click.argument('markdown_file')
-@click.option('--output', '-o', default=None)
-@click.option('--execution-path', default=None)
-@click.option('--execution-timeout', default=600)
-@click.option('--html', is_flag=True)
-@click.option('--slides', is_flag=True)
+@click.option('--output', '-o', default=None, help='jupyter file name')
+@click.option('--execution-path', default=None, help='sets the notebook execution path')
+@click.option('--execution-timeout', default=600, help='The time to wait (in seconds) for output from executions.\nIf a cell execution takes longer, an exception (TimeoutError\n on python 3+, RuntimeError on python 2) is raised.')
+@click.option('--html', is_flag=True, help='convert to html format')
+@click.option('--slides', is_flag=True, help='convert to slides format')
 def cli(markdown_file, output, execution_path, execution_timeout, html, slides):
     FORMAT = "%(asctime)s:%(levelname)s:%(filename)s:%(lineno)d: %(message)s"
     logging.basicConfig(level=logging.INFO, format=FORMAT)

@@ -24,7 +24,7 @@ def markdown2jupyter(markdown_file, jupyter_file, preprocessor=None, version=Non
     ])
     if preprocessor:
         notebook = preprocessor(notebook)
-    with open(jupyter_file, 'w') as f:
+    with open(jupyter_file, 'w', encoding="utf-8") as f:
         json.dump(notebook, f)
 
 
@@ -42,7 +42,7 @@ def chunk2cell(chunk, version=None):
 def load_markdown_chunks(filename):
     so_far = []
     cell_type = None
-    with open(filename, 'r') as f:
+    with open(filename, 'r', encoding="utf-8") as f:
         for line in f:
             if not line.startswith('```'):
                 so_far.append(line)
